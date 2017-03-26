@@ -1,20 +1,24 @@
 package org.wargamesproject.vinlookup;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import org.wargamesproject.vinlookup.model.VINNumber;
+import org.wargamesproject.vinlookup.model.VehicleDetails;
 
 public class MainActivity extends AppCompatActivity implements TextWatcher
 {
     // Member variables
     private TextView vinNumberText;
     private Button lookupButton;
+    private VINNumber vinNumber;
     // Constants
     private static final String TAG = "VINLOOKUP_MAIN";
 
@@ -29,6 +33,15 @@ public class MainActivity extends AppCompatActivity implements TextWatcher
         this.vinNumberText.addTextChangedListener(this);
 
         this.lookupButton = (Button)this.findViewById(R.id.lookupButton);
+    }
+
+    public void showVINDetails(View view)
+    {
+        Log.v(TAG,"In showVINDetails()...");
+
+        Intent intent = new Intent(this,VINDetailsActivity.class);
+        intent.putExtra(Constants.VIN_DETAILS,new VehicleDetails(this.vinNumber));
+        this.startActivity(intent);
     }
 
     @Override
@@ -63,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher
                 Log.v(TAG,enteredVIN.toString());
 
                 // The VIN is valid.  Enable the lookup button
+                this.vinNumber = enteredVIN;
                 lookupButton.setEnabled(true);
             }
             else

@@ -1,10 +1,12 @@
 package org.wargamesproject.vinlookup.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Matt on 3/26/2017.
  */
 
-public class VINNumber
+public class VINNumber implements Serializable
 {
     // Member variables
     private String fullVINNumber;
@@ -13,6 +15,7 @@ public class VINNumber
     private String motorType,serialNumber;
     private boolean validVIN;
     // Constants
+    private final static long serialVersionUID = 1L;
     private final static int VIN_LENGTH = 17;
     // VIN number code position constants and lengths
     private final static int POS_COUNTRY_CODE1 = 0;

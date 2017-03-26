@@ -40,12 +40,13 @@
         android:id="@+id/lookupButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
         android:layout_marginStart="0dp"
         android:enabled="false"
+        android:onClick="showVINDetails"
         android:text="Lookup VIN"
-        app:layout_constraintTop_toBottomOf="@+id/vinNumberText"
-        android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toLeftOf="@+id/guideline"/>
+        app:layout_constraintLeft_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/vinNumberText"/>
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"

@@ -213,6 +213,14 @@ public class VINNumber implements Serializable
                 this.manufactureCountry2 = this.fullVINNumber.charAt(POS_COUNTRY_CODE2);
                 this.marque = this.fullVINNumber.charAt(POS_MARQUE);
                 this.manufacturingLine = this.fullVINNumber.charAt(POS_MANUFACTURING_LINE);
+                this.bodyType = this.fullVINNumber.charAt(POS_BODY_TYPE);
+                this.motorType = this.fullVINNumber.substring(POS_MOTOR_TYPE,POS_MOTOR_TYPE + LEN_MOTOR_TYPE);
+                this.restraintSystem = this.fullVINNumber.charAt(POS_RESTRAINT_SYSTEM);
+                this.checkDigit = this.fullVINNumber.charAt(POS_CHECK_DIGIT);
+                this.modelYearCode = this.fullVINNumber.charAt(POS_MODEL_YEAR);
+                this.manufacturingPlant = this.fullVINNumber.charAt(POS_MANUFACTURING_PLANT);
+                this.steeringPosition = this.fullVINNumber.charAt(POS_STEERING_POSITION);
+                this.serialNumber = this.fullVINNumber.substring(POS_SERIAL_NUMBER);
             }
         }
     }

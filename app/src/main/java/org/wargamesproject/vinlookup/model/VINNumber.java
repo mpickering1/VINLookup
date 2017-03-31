@@ -59,19 +59,9 @@ public class VINNumber implements Serializable
         return this.manufactureCountry1;
     }
 
-    public void setManufacturerCountry1(char countryCode)
-    {
-        this.manufactureCountry1 = countryCode;
-    }
-
     public char getManufacturerCountry2()
     {
         return this.manufactureCountry2;
-    }
-
-    public void setManufacturerCountry2(char countryCode)
-    {
-        this.manufactureCountry2 = countryCode;
     }
 
     public char getMarque()
@@ -79,19 +69,9 @@ public class VINNumber implements Serializable
         return marque;
     }
 
-    public void setMarque(char marque)
-    {
-        this.marque = marque;
-    }
-
     public char getManufacturingLine()
     {
         return manufacturingLine;
-    }
-
-    public void setManufacturingLine(char manufacturingLine)
-    {
-        this.manufacturingLine = manufacturingLine;
     }
 
     public char getBodyType()
@@ -99,19 +79,9 @@ public class VINNumber implements Serializable
         return bodyType;
     }
 
-    public void setBodyType(char bodyType)
-    {
-        this.bodyType = bodyType;
-    }
-
     public char getRestraintSystem()
     {
         return restraintSystem;
-    }
-
-    public void setRestraintSystem(char restraintSystem)
-    {
-        this.restraintSystem = restraintSystem;
     }
 
     public char getCheckDigit()
@@ -119,19 +89,9 @@ public class VINNumber implements Serializable
         return checkDigit;
     }
 
-    public void setCheckDigit(char checkDigit)
-    {
-        this.checkDigit = checkDigit;
-    }
-
     public char getModelYearCode()
     {
         return modelYearCode;
-    }
-
-    public void setModelYearCode(char modelYearCode)
-    {
-        this.modelYearCode = modelYearCode;
     }
 
     public char getManufacturingPlant()
@@ -139,19 +99,9 @@ public class VINNumber implements Serializable
         return manufacturingPlant;
     }
 
-    public void setManufacturingPlant(char manufacturingPlant)
-    {
-        this.manufacturingPlant = manufacturingPlant;
-    }
-
     public char getSteeringPosition()
     {
         return steeringPosition;
-    }
-
-    public void setSteeringPosition(char steeringPosition)
-    {
-        this.steeringPosition = steeringPosition;
     }
 
     public String getMotorType()
@@ -159,19 +109,9 @@ public class VINNumber implements Serializable
         return motorType;
     }
 
-    public void setMotorType(String motorType)
-    {
-        this.motorType = motorType;
-    }
-
     public String getSerialNumber()
     {
         return serialNumber;
-    }
-
-    public void setSerialNumber(String serialNumber)
-    {
-        this.serialNumber = serialNumber;
     }
 
     public boolean isValidVIN()
@@ -220,7 +160,7 @@ public class VINNumber implements Serializable
                 this.modelYearCode = this.fullVINNumber.charAt(POS_MODEL_YEAR);
                 this.manufacturingPlant = this.fullVINNumber.charAt(POS_MANUFACTURING_PLANT);
                 this.steeringPosition = this.fullVINNumber.charAt(POS_STEERING_POSITION);
-                this.serialNumber = this.fullVINNumber.substring(POS_SERIAL_NUMBER);
+                this.serialNumber = this.fullVINNumber.substring(POS_SERIAL_NUMBER,POS_SERIAL_NUMBER + LEN_SERIAL_NUMBER);
             }
         }
     }

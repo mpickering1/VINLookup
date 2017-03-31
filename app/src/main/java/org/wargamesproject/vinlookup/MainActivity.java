@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher
     public void showVINDetails(View view)
     {
         Log.v(TAG,"In showVINDetails()...");
+        Log.v(TAG,"Lookup VIN button clicked, showing VIN details...");
 
         Intent intent = new Intent(this,VINDetailsActivity.class);
         intent.putExtra(Constants.VIN_DETAILS,new VehicleDetails(this.vinNumber));
@@ -47,13 +48,11 @@ public class MainActivity extends AppCompatActivity implements TextWatcher
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after)
     {
-
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count)
     {
-
     }
 
     @Override
@@ -62,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher
         //Log.v(TAG,"In afterTextChanged()...");
 
         lookupButton.setEnabled(false);
+
         String vinNumberStr = s.toString();
 
         if (vinNumberStr.length() == 17)

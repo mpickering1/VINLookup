@@ -1,6 +1,8 @@
 package org.wargamesproject.vinlookup.model;
 
 import java.io.Serializable;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Created by Matt on 3/26/2017.
@@ -10,9 +12,7 @@ public class VINNumber implements Serializable
 {
     // Member variables
     private String fullVINNumber;
-    private Character manufactureCountry1,manufactureCountry2,marque,manufacturingLine,bodyType;
-    private Character restraintSystem,checkDigit,modelYearCode,manufacturingPlant,steeringPosition;
-    private String motorType,serialNumber;
+    private Map<VINFieldEnum,String> vinFieldMap;
     private boolean validVIN;
     // Constants
     private final static long serialVersionUID = 1L;
@@ -37,6 +37,7 @@ public class VINNumber implements Serializable
 
     public VINNumber(String vin)
     {
+        this.vinFieldMap = new HashMap<VINFieldEnum,String>();
         // VINs are 17 digits.  Sample VIN could be SCBZD0TBXCH05038 or SCAZS02A8KCX26429
         this.setFullVINNumber(vin);
     }
@@ -54,64 +55,66 @@ public class VINNumber implements Serializable
         this.parseVIN();
     }
 
-    public char getManufacturerCountry1()
+    public String getField(VINFieldEnum field)
     {
-        return this.manufactureCountry1;
+        return this.vinFieldMap.get(field);
     }
 
-    public char getManufacturerCountry2()
+    // Convenience methods to retrieve specific VIN field values
+
+    public String getCountryCode()
     {
-        return this.manufactureCountry2;
+        return this.vinFieldMap.get(VINFieldEnum.COUNTRY_CODE);
     }
 
-    public char getMarque()
+    public String getMarque()
     {
-        return marque;
+        return this.vinFieldMap.get(VINFieldEnum.MARQUE);
     }
 
-    public char getManufacturingLine()
+    public String getManufacturingLine()
     {
-        return manufacturingLine;
+        return this.vinFieldMap.get(VINFieldEnum.MANUFACTURING_LINE);
     }
 
-    public char getBodyType()
+    public String getBodyType()
     {
-        return bodyType;
+        return this.vinFieldMap.get(VINFieldEnum.BODY_TYPE);
     }
 
-    public char getRestraintSystem()
+    public String getRestraintSystem()
     {
-        return restraintSystem;
+        return this.vinFieldMap.get(VINFieldEnum.RESTRAINT_SYSTEM);
     }
 
-    public char getCheckDigit()
+    public String getCheckDigit()
     {
-        return checkDigit;
+        return this.vinFieldMap.get(VINFieldEnum.CHECK_DIGIT);
     }
 
-    public char getModelYearCode()
+    public String getModelYearCode()
     {
-        return modelYearCode;
+        return this.vinFieldMap.get(VINFieldEnum.MODEL_YEAR);
     }
 
-    public char getManufacturingPlant()
+    public String getManufacturingPlant()
     {
-        return manufacturingPlant;
+        return this.vinFieldMap.get(VINFieldEnum.MANUFACTURING_PLANT);
     }
 
-    public char getSteeringPosition()
+    public String getSteeringPosition()
     {
-        return steeringPosition;
+        return this.vinFieldMap.get(VINFieldEnum.STEERING_POSITION);
     }
 
     public String getMotorType()
     {
-        return motorType;
+        return this.vinFieldMap.get(VINFieldEnum.MOTOR_TYPE);
     }
 
     public String getSerialNumber()
     {
-        return serialNumber;
+        return this.vinFieldMap.get(VINFieldEnum.SERIAL_NUMBER);
     }
 
     public boolean isValidVIN()
@@ -149,18 +152,10 @@ public class VINNumber implements Serializable
             // If the VIN is valid, parse it into its component elements
             if (this.validVIN == true)
             {
-                this.manufactureCountry1 = this.fullVINNumber.charAt(POS_COUNTRY_CODE1);
-                this.manufactureCountry2 = this.fullVINNumber.charAt(POS_COUNTRY_CODE2);
-                this.marque = this.fullVINNumber.charAt(POS_MARQUE);
-                this.manufacturingLine = this.fullVINNumber.charAt(POS_MANUFACTURING_LINE);
-                this.bodyType = this.fullVINNumber.charAt(POS_BODY_TYPE);
-                this.motorType = this.fullVINNumber.substring(POS_MOTOR_TYPE,POS_MOTOR_TYPE + LEN_MOTOR_TYPE);
-                this.restraintSystem = this.fullVINNumber.charAt(POS_RESTRAINT_SYSTEM);
-                this.checkDigit = this.fullVINNumber.charAt(POS_CHECK_DIGIT);
-                this.modelYearCode = this.fullVINNumber.charAt(POS_MODEL_YEAR);
-                this.manufacturingPlant = this.fullVINNumber.charAt(POS_MANUFACTURING_PLANT);
-                this.steeringPosition = this.fullVINNumber.charAt(POS_STEERING_POSITION);
-                this.serialNumber = this.fullVINNumber.substring(POS_SERIAL_NUMBER,POS_SERIAL_NUMBER + LEN_SERIAL_NUMBER);
+                for (VINFieldEnum currentField : VINFieldEnum.values())
+                {
+                    this.vinFieldMap.put(currentField,this.fullVINNumber.substring(currentField.getPosition(),currentField.getPosition() + currentField.getLength()));
+                }
             }
         }
     }
@@ -175,41 +170,16 @@ public class VINNumber implements Serializable
 
         builder.append(this.getClass().getName());
         builder.append('[');
-        builder.append("manufactureCountry1=");
-        builder.append(this.manufactureCountry1);
-        builder.append(',');
-        builder.append("manufacturerCountry2=");
-        builder.append(this.manufactureCountry2);
-        builder.append(',');
-        builder.append("marque=");
-        builder.append(this.marque);
-        builder.append(',');
-        builder.append("manufacturingLine=");
-        builder.append(this.manufacturingLine);
-        builder.append(',');
-        builder.append("bodyType=");
-        builder.append(this.bodyType);
-        builder.append(',');
-        builder.append("motorType=");
-        builder.append(this.motorType);
-        builder.append(',');
-        builder.append("restraintSystem=");
-        builder.append(this.restraintSystem);
-        builder.append(',');
-        builder.append("checkDigit=");
-        builder.append(this.checkDigit);
-        builder.append(',');
-        builder.append("modelYearCode=");
-        builder.append(this.modelYearCode);
-        builder.append(',');
-        builder.append("manufacturingPlant=");
-        builder.append(this.manufacturingPlant);
-        builder.append(',');
-        builder.append("steeringPosition=");
-        builder.append(this.steeringPosition);
-        builder.append(',');
-        builder.append("serialNumber=");
-        builder.append(this.serialNumber);
+
+        for (VINFieldEnum currentField : VINFieldEnum.values())
+        {
+            builder.append(currentField.name());
+            builder.append('=');
+            builder.append(this.vinFieldMap.get(currentField));
+            builder.append(',');
+        }
+
+        builder.setLength(builder.length()-1);
         builder.append(']');
 
         return builder.toString();
